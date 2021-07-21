@@ -34,8 +34,14 @@ router.get('/:id', (req, res, next) => {
         * Provide an error message
         * Forward the error to the global error handler
   */
-
-  res.render('quote', { title: 'Code Quote', quote: quotes[req.params.id] });
+  if (quotes[req.params.id]) {
+    res.render('quote', { title: 'Code Quote', quote: quotes[req.params.id] });
+  } else {
+    const err = new Error('Not Found')
+    err.status = 404;
+    err.message = `looks like the quote you requested doesn't exist`
+    next(err);
+  }
 });
 
 module.exports = router;

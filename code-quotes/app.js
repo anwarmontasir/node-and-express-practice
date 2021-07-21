@@ -28,14 +28,17 @@ app.use('/quotes', quotesRouter);
 
 
 /* ERROR HANDLERS */
-/* 404 handler to catch undefined or non-existent route requests */ 
+/* 404 handler to catch undefined or non-existent route requests */
 app.use((req, res, next) => {
   console.log('404 error handler called');
 
   /* TODO 1: Send a response to the client
     - Set the response status to 404
     - Render the 'not-found' view
-  */ 
+  */
+  res.status(404);
+  res.render('not-found');
+
 });
 
 /* Global error handler */
@@ -56,6 +59,14 @@ app.use((err, req, res, next) => {
           set it to 500 by default if no error status is set
         * Render the 'error' view, passing it the error object
   */
+  if (err.status === 404) {
+    res.status(404);
+    res.render('not-found', {err});
+  } else {
+    err.message = err.message || 'Oops, something went wrong on the server';
+    res.status(err.status || 500);
+    res.render('error', {err});
+  }
 });
 
 module.exports = app;

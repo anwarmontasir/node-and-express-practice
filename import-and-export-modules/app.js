@@ -12,18 +12,6 @@ app.use(mainRoutes);
 app.use(errorHandlers.handle404);
 app.use(errorHandlers.handleGlobalError);
 
-/*
-* Helpers for Various Tasks
-*/
-
-// Helper function to reverse a string
-const reverseString = (string) => [...string].reverse().join('');
-
-// Helper function to shorten a string to fifty characters
-const shortenString = (string) => {
-  return string.length > 50 ? string.substring(0, 50) + "..." : string;
-}
-
 // Turn on Express server
 app.listen(3000, () => {
   console.log('Server listening on port 3000');

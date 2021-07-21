@@ -1,6 +1,11 @@
 const express = require('express');
 const router = express.Router();
 
+const helpers = require('./helpers');
+
+const reverseString = helpers.reverseString;
+const shortenString = helpers.shortenString;
+
 /*
 * Route Handlers
 */
